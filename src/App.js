@@ -14,6 +14,9 @@ class App extends Component {
 
   handleKeyPress = e => {
     if (e.key === "Enter") {
+      let notesArr = this.state.notes;
+      notesArr.push(this.state.noteText);
+      this.setState({ noteText: "" });
     }
   };
 
@@ -38,7 +41,7 @@ class App extends Component {
     });
     return (
       <div className="container">
-        <div className="header">React ToDo Application</div>
+        <div className="header">To Do Application</div>
         {notes}
         <div className="btn" onClick={this.handleAddition.bind(this)}>
           +
