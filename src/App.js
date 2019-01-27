@@ -35,13 +35,11 @@ class App extends Component {
   };
   render() {
     let notes = this.state.notes.map((val, key) => {
-      return (
-        <Notes key={key} text={val} onDelete={() => this.handleDelete(key)} />
-      );
+      return <Notes key={key} text={val} />;
     });
     return (
       <div className="container">
-        <div className="header">To Do Application</div>
+        <div className="header">React ToDo Application</div>
         {notes}
         <div className="btn" onClick={this.handleAddition.bind(this)}>
           +
