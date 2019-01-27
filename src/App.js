@@ -1,22 +1,48 @@
 import React, { Component } from "react";
-
+import Notes from "./components/Notes";
 import "./App.css";
 
 class App extends Component {
   state = {
-    noteText: ""
+    noteText: "",
+    notes: []
   };
 
   updateNoteText = e => {
     this.setState({ noteText: e.target.value });
   };
 
-  handleKeyPress = () => {};
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
+    }
+  };
+
+  handleAddition = () => {
+    if (this.state.noteText === "") return false;
+    let notesArr = this.state.notes;
+    notesArr.push(this.state.noteText);
+    this.setState({ noteText: "" });
+    this.textInput.focus();
+  };
+
+  handleDelete = index => {
+    let notesArr = this.state.notes;
+    notesArr.splice(index, 1);
+    this.setState({ notes: notesArr });
+  };
   render() {
+    let notes = this.state.notes.map((val, key) => {
+      return (
+        <Notes key={key} text={val} onDelete={() => this.handleDelete(key)} />
+      );
+    });
     return (
       <div className="container">
         <div className="header">React ToDo Application</div>
-        <div className="btn">+</div>
+        {notes}
+        <div className="btn" onClick={this.handleAddition.bind(this)}>
+          +
+        </div>
         <input
           type="text"
           className="text-input"
